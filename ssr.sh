@@ -69,7 +69,7 @@ BBR_installation_status(){
 	if [[ ! -e ${BBR_file} ]]; then
 		echo -e "${Error} 没有发现 BBR脚本，开始下载..."
 		cd "${file}"
-		if ! wget -N --no-check-certificate  https://github.com/Dec12th/doubi-SSR/blob/master/bbr.sh; then
+		if ! wget -N --no-check-certificate  https://raw.githubusercontent.com/Dec12th/doubi-SSR/blob/master/bbr.sh; then
 			echo -e "${Error} BBR 脚本下载失败 !" && exit 1
 		else
 			echo -e "${Info} BBR 脚本下载完成 !"
@@ -621,14 +621,14 @@ Download_SSR(){
 }
 Service_SSR(){
 	if [[ ${release} = "centos" ]]; then
-		if ! wget --no-check-certificate https://github.com/Dec12th/doubi-SSR/tree/master/other/ssr_centos -O /etc/init.d/ssr; then
+		if ! wget --no-check-certificate https://raw.githubusercontent.com/Dec12th/doubi-SSR/tree/master/other/ssr_centos -O /etc/init.d/ssr; then
 			echo -e "${Error} ShadowsocksR服务 管理脚本下载失败 !" && exit 1
 		fi
 		chmod +x /etc/init.d/ssr
 		chkconfig --add ssr
 		chkconfig ssr on
 	else
-		if ! wget --no-check-certificate https://github.com/Dec12th/doubi-SSR/tree/master/other/ssr_debian -O /etc/init.d/ssr; then
+		if ! wget --no-check-certificate https://raw.githubusercontent.com/Dec12th/doubi-SSR/tree/master/other/ssr_debian -O /etc/init.d/ssr; then
 			echo -e "${Error} ShadowsocksR服务 管理脚本下载失败 !" && exit 1
 		fi
 		chmod +x /etc/init.d/ssr
@@ -1212,7 +1212,7 @@ Install_ServerSpeeder(){
 	[[ -e ${Server_Speeder_file} ]] && echo -e "${Error} 锐速(Server Speeder) 已安装 !" && exit 1
 	cd /root
 	#借用91yun.rog的开心版锐速
-	wget -N --no-check-certificate https://github.com/Dec12th/doubi-SSR/blob/master/serverspeeder.sh
+	wget -N --no-check-certificate https://raw.githubusercontent.com/Dec12th/doubi-SSR/blob/master/serverspeeder.sh
 	[[ ! -e "serverspeeder.sh" ]] && echo -e "${Error} 锐速安装脚本下载失败 !" && exit 1
 	bash serverspeeder.sh
 	sleep 2s
@@ -1276,7 +1276,7 @@ Configure_LotServer(){
 Install_LotServer(){
 	[[ -e ${LotServer_file} ]] && echo -e "${Error} LotServer 已安装 !" && exit 1
 	#Github: https://github.com/0oVicero0/serverSpeeder_Install
-	wget --no-check-certificate -qO /tmp/appex.sh "https://github.com/Dec12th/doubi-SSR/blob/master/appex.sh"
+	wget --no-check-certificate -qO /tmp/appex.sh "https://raw.githubusercontent.com/Dec12th/doubi-SSR/blob/master/appex.sh"
 	[[ ! -e "/tmp/appex.sh" ]] && echo -e "${Error} LotServer 安装脚本下载失败 !" && exit 1
 	bash /tmp/appex.sh 'install'
 	sleep 2s
@@ -1292,7 +1292,7 @@ Uninstall_LotServer(){
 	stty erase '^H' && read -p "(默认: n):" unyn
 	[[ -z ${unyn} ]] && echo && echo "已取消..." && exit 1
 	if [[ ${unyn} == [Yy] ]]; then
-		wget --no-check-certificate -qO /tmp/appex.sh "https://github.com/Dec12th/doubi-SSR/blob/master/appex.sh" && bash /tmp/appex.sh 'uninstall'
+		wget --no-check-certificate -qO /tmp/appex.sh "https://raw.githubusercontent.com/Dec12th/doubi-SSR/blob/master/appex.sh" && bash /tmp/appex.sh 'uninstall'
 		echo && echo "LotServer 卸载完成 !" && echo
 	fi
 }
@@ -1374,12 +1374,12 @@ Other_functions(){
 }
 # 封禁 BT PT SPAM
 BanBTPTSPAM(){
-	wget -N --no-check-certificate https://github.com/Dec12th/doubi-SSR/blob/master/ban_iptables.sh && chmod +x ban_iptables.sh && bash ban_iptables.sh banall
+	wget -N --no-check-certificate https://raw.githubusercontent.com/Dec12th/doubi-SSR/blob/master/ban_iptables.sh && chmod +x ban_iptables.sh && bash ban_iptables.sh banall
 	rm -rf ban_iptables.sh
 }
 # 解封 BT PT SPAM
 UnBanBTPTSPAM(){
-	wget -N --no-check-certificate https://github.com/Dec12th/doubi-SSR/blob/master/ban_iptables.sh && chmod +x ban_iptables.sh && bash ban_iptables.sh unbanall
+	wget -N --no-check-certificate https://raw.githubusercontent.com/Dec12th/doubi-SSR/blob/master/ban_iptables.sh && chmod +x ban_iptables.sh && bash ban_iptables.sh unbanall
 	rm -rf ban_iptables.sh
 }
 Set_config_connect_verbose_info(){
@@ -1414,7 +1414,7 @@ Set_config_connect_verbose_info(){
 Update_Shell(){
 	echo -e "当前版本为 [ ${sh_ver} ]，开始检测最新版本..."
 	sh_new_ver=$(wget --no-check-certificate -qO- "https://softs.fun/Bash/ssr.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="softs"
-	[[ -z ${sh_new_ver} ]] && sh_new_ver=$(wget --no-check-certificate -qO- "https://github.com/Dec12th/doubi-SSR/blob/master/ssr.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
+	[[ -z ${sh_new_ver} ]] && sh_new_ver=$(wget --no-check-certificate -qO- "https://raw.githubusercontent.com/Dec12th/doubi-SSR/blob/master/ssr.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
 	[[ -z ${sh_new_ver} ]] && echo -e "${Error} 检测最新版本失败 !" && exit 0
 	if [[ ${sh_new_ver} != ${sh_ver} ]]; then
 		echo -e "发现新版本[ ${sh_new_ver} ]，是否更新？[Y/n]"
@@ -1424,7 +1424,7 @@ Update_Shell(){
 			if [[ $sh_new_type == "softs" ]]; then
 				wget -N --no-check-certificate https://softs.fun/Bash/ssr.sh && chmod +x ssr.sh
 			else
-				wget -N --no-check-certificate https://github.com/Dec12th/doubi-SSR/blob/master/ssr.sh && chmod +x ssr.sh
+				wget -N --no-check-certificate https://raw.githubusercontent.com/Dec12th/doubi-SSR/blob/master/ssr.sh && chmod +x ssr.sh
 			fi
 			echo -e "脚本已更新为最新版本[ ${sh_new_ver} ] !"
 		else
